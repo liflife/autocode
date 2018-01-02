@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data">
+	
+<resultMap type="com.autocode.domain.TableField" id="tableField">
+		<result property="Field" column="Field" />
+		<result property="Type" column="Type" />
+		<result property="Null" column="Null" />
+		<result property="Key" column="Key" />
+		<result property="Default" column="Default" />
+		<result property="Extra" column="Extra" />
+</resultMap>
+	
+	<!-- mysql -->
+	<select id="selectAllDataMysql" resultType="string">
+		 show tables
+ 	</select>
+ 	<!-- #{tablename} -->
+ 	<select id="findDataByNameMysql" parameterType="com.autocode.dao.Tablename" resultType="com.autocode.domain.TableField">
+		  show columns from  ${tablename}
+ 	</select>
+ 	<!-- oracle -->
+ 	<select id="selectAllDataOracle" resultType="string">
+		select t.table_name  from tabs t
+ 	</select>
+ 	<!-- #{tablename} -->
+ 	<select id="findDataByNameOracle" parameterType="com.autocode.dao.Tablename" resultType="com.autocode.domain.TableField">
+		 select c.COLUMN_NAME as Field,c.DATA_TYPE  as Type from USER_TAB_COLUMNS c where  c.TABLE_NAME=#{tablename}
+ 	</select>
+</mapper>
